@@ -1,7 +1,4 @@
- ## Bloccit: a Reddit replica to teach the fundamentals of web development and Rails.
+  Pop, Lock and #Bloccit.
+    Push that branch up, Github is your goal.
 
-New Kids on the Bloc.
-
- Made with my mentor at [Bloc](http://bloc.io).
-
- SLY
+    Reddit replica teaches fundamentals of web development and Rails.
