@@ -20,6 +20,9 @@ posts = Post.all
 end
 
 
+Post.find_or_create_by(title: "Entitlement", body: "Apropos, no?")
+
+
 puts "Seeds finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
