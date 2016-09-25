@@ -5,22 +5,24 @@ require 'random_data'
   Post.create!(
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph
-    )
+  )
 end
+
+assignment_post = Post.find_or_create_by!(
+  title: "Entitlement",
+  body: "Apropos, no?"
+)
 
 posts = Post.all
 
 
 # Create comments
 100.times do
-  Comment.create!(
-    post: posts.sample,
-    body: RandomData.random_paragraph
-    )
+  Comment.find_or_create_by!(
+    post: assignment_post,
+    body: "Body language"
+)
 end
-
-
-Post.find_or_create_by(title: "Entitlement", body: "Apropos, no?")
 
 
 puts "Seeds finished"
