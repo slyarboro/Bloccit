@@ -12,12 +12,12 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new
-    @question.title = params[:question][:title]
-    @question.body = params[:question][:body]
-    @question.resolved = params[:question][:resolved]
+    # @question = Question.new
+    # @question.title = params[:question][:title]
+    # @question.body = params[:question][:body]
+    # @question.resolved = params[:question][:resolved]
 
-    # @question = Question.new(params.require(:question).permit(:title, :body, :resolved))
+    @question = Question.new(params.require(:question).permit(:title, :body, :resolved))
 
     if @question.save
       flash[:notice] = "Question saved successfully."
@@ -35,13 +35,13 @@ class QuestionsController < ApplicationController
 
 
   def update
+    # @question = Question.find(params[:id])
+    # @question.title = params[:question][:title]
+    # @question.body = params[:question][:body]
+    # @question.resolved = params[:question][:resolved]
     @question = Question.find(params[:id])
-    @question.title = params[:question][:title]
-    @question.body = params[:question][:body]
-    @question.resolved = params[:question][:resolved]
 
-    if @question.save
-    # if @question.update_attributes(params.require(:question).permit(:title, :body, :resolved))
+    if @question.update_attributes(params.require(:question).permit(:title, :body, :resolved))
       flash[:notice] = "Question updated successfully."
       redirect_to @question
     else
