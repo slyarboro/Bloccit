@@ -5,17 +5,14 @@ class PostsController < ApplicationController
   end
 
 
-
   def show
     @post = Post.find(params[:id])
   end
 
 
-
   def new
     @post = Post.new
   end
-
 
 
   def create
@@ -33,7 +30,36 @@ class PostsController < ApplicationController
   end
 
 
-
   def edit
+    @post = Post.find(params[:id])
   end
+
+
+  def update
+    @post = Post.find(params[:id])
+    @post.title = params[:post][:title]
+    @post.body = params[:post][:body]
+
+    if @post.save
+      flash[:notice] = "HOLLA. Post was updated successfully."
+      redirect_to @post
+    else
+      flash.now[:alert] = "There was an error saving the post. Take another shot!"
+      render :edit
+    end
+  end
+
+
+  def destroy
+    @post = Post.find(params[:id])
+
+    if @post.destroy
+      flash[:notice] = "#{@post.title} was deleted successfully."
+      redirect_to posts_path
+    else
+      flash[:alert] = "There was an error deleting the post."
+      render :show
+    end
+  end
+
 end
