@@ -1,0 +1,33 @@
+<h1>New Sponsored Post</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for Sponsored Posts:</p>
+    <ul>
+      <li>Use enthusiasm.</li>
+      <li>Haiku required.</li>
+      <li>Please keep in mind: When writing lyrics and constructing rhymes, never neglect the importance of a lyricist's individualized flow and subsequent delivery of the beat.</li>
+    </ul>
+  </div>
+
+    <div class="col-md-8">
+         <%= form_for [@topic, @sponsored_post] do |f| %>
+         <div class="form-group">
+           <%= f.label :title %>
+           <%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" %>
+         </div>
+         <div class="form-group">
+           <%= f.label :body %>
+           <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
+         </div>
+         <div class="form-group">
+           <%= f.label :price %>
+           <%= f.number_field :price, class: 'form-control', placeholder: "Price tag" %>
+         </div>
+         <div class="form-group">
+           <%= f.submit "Save", class: 'btn btn-success' %>
+         </div>
+         <% end %>
+
+       </div>
+     </div>

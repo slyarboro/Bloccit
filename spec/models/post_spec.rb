@@ -1,11 +1,12 @@
 require 'rails_helper'
+include RandomData
 
 RSpec.describe Post, type: :model do
 
-   let(:name) {RandomData.random_sentence}
-   let(:description) {RandomData.random_paragraph}
-   let(:title) {RandomData.random_sentence}
-   let(:body) {RandomData.random_paragraph}
+  #  let(:name) {RandomData.random_sentence}
+  #  let(:description) {RandomData.random_paragraph}
+  #  let(:title) {RandomData.random_sentence}
+  #  let(:body) {RandomData.random_paragraph}
 
    let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
 
@@ -15,8 +16,17 @@ RSpec.describe Post, type: :model do
 
 # responds to title?? *sly
   describe "attributes" do
-    it "has title and body attributes" do
-      expect(post).to have_attributes(title: title, body: body)
+
+    it "responds to title" do
+      expect(post).to respond_to(:title)
     end
+
+    it "responds to body" do
+      expect(post).to respond_to(:body)
+    end
+
+    # it "has title and body attributes" do
+    #   expect(post).to have_attributes(title: title, body: body)
+
   end
 end
