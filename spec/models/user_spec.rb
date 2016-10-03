@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
    # Shoulda tests for name
    it { is_expected.to validate_presence_of(:name) }
    it { is_expected.to validate_length_of(:name).is_at_least(1) }
+   it { is_expected.to allow_value("Bloccitt User").for(:name)}
 
    # Shoulda tests for email
    it { is_expected.to validate_presence_of(:email) }
@@ -20,10 +21,21 @@ RSpec.describe User, type: :model do
    it { is_expected.to validate_length_of(:password).is_at_least(6) }
 
    describe "attributes" do
-     it "should have name and email attributes" do
-       expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
-     end
-   end
+    it 'responds to name' do
+      expect(user).to respond_to(:name)
+    end
+
+    it 'responds to email' do
+      expect(user).to respond_to(:email)
+    end
+
+    it 'formats name of user' do
+      user.name = "User Name"
+      user.save
+      expect(user.name).to eq("User Name")
+    end
+  end
+
 
    describe "invalid user" do
      let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
