@@ -9,6 +9,10 @@ RSpec.describe Topic, type: :model do
 
   it {is_expected.to have_many(:posts)}
 
+  it { is_expected.to validate_length_of(:name).is_at_least(5) }
+  it { is_expected.to validate_length_of(:description).is_at_least(15) }
+
+
   describe "attributes" do
     it "responds to name" do
       expect(topic).to respond_to(:name)
