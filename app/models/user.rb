@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
+  has_many :posts
 
 # register inline callback {self.email = email.downcase} directly after [the before_save] callback
-  before_save { self.email = email.downcase if email.present? }
+  before_save { self.email = email.downcase}
 
 # ensure name is present with respective lengths
    validates :name, length: { minimum: 1, maximum: 100 }, presence: true
@@ -18,7 +19,7 @@ class User < ActiveRecord::Base
              uniqueness: { case_sensitive: false },
              length: { minimum: 3, maximum: 254 }
 
-# adds methods to set and authenticate; requires the [password_digest] attribute             
+# adds methods to set and authenticate; requires the [password_digest] attribute
    has_secure_password
 
 end
