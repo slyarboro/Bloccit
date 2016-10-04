@@ -8,11 +8,16 @@ RSpec.describe Comment, type: :model do
 
    let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
 
-   let(:comment) { Comment.create!(body: 'Comment Body', post: post) }
+   let(:comment) { Comment.create!(body: 'Comment Body', post: post, user: user) }
 
-# responds to body?? *sly
+     it { is_expected.to belong_to(:post) }
+     it { is_expected.to belong_to(:user) }
+
+     it { is_expected.to validate_presence_of(:body) }
+     it { is_expected.to validate_length_of(:body).is_at_least(5) }
+
   describe "attributes" do
-    it "has a body attribute" do
+    it "responds to body" do
       expect(comment).to have_attributes(body: "Comment Body")
     end
   end

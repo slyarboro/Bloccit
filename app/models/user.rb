@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :posts
+  has_many :comments
 
 # register inline callback {self.email = email.downcase} directly after [the before_save] callback
   before_save { self.email = email.downcase}
