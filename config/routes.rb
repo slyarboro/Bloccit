@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   post 'confirm' => 'users#confirm'
-
   get 'about' => 'welcome#about'
-
   root to: 'welcome#index'
 end
