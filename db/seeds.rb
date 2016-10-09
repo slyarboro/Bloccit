@@ -54,6 +54,7 @@ end
    password: 'helloworld'
  )
 
+
 puts "Seeds finished"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"

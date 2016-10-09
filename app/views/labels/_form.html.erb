@@ -1,0 +1,12 @@
+<div class="form-group">
+
+   <%= f.label :labels %>
+   <%= f.text_field :labels,
+          class: 'form-control',
+          placeholder: 'Enter labels (separated by commas)',
+          value: labels.map(&:name).join(', ') %>
+</div>
+
+  <!-- Likewise, to create string of "label objects" within array can be done using [ .join(', ') ] on the 'new_array' itself:
+      new_labels = labels.map(&:name)
+      labels_string = new_labels.join(', ') -->

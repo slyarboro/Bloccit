@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :comments
 
 # register inline callback {self.email = email.downcase} directly after [the before_save] callback
-  before_save { self.email = email.downcase}
+  before_save { self.email = email.downcase }
   before_save { self.role ||= :member }
 
 # ensure name is present with respective lengths

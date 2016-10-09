@@ -1,7 +1,8 @@
 class TopicsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show]
-  before_action :authorize_user, except: [:index, :show]
+  # before_action :authorize_moderator, only: [:edit, :update]
+  before_action :authorize_user, except: [:index, :edit, :update, :show]
 
   def index
     @topics = Topic.all
@@ -19,12 +20,15 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
 
     if @topic.save
-      redirect_to @topic, notice: 'Topic was saved successfully.'
+       @topic.labels = Label.update_labels(params[:topic][:labels])
+       flash[:notice] = "Topic was saved successfully."
+       redirect_to @topic
     else
       flash.now[:alert] = "Error creating topic. Please try again."
       render :new
     end
   end
+
 
   def edit
      @topic = Topic.find(params[:id])
@@ -36,7 +40,8 @@ class TopicsController < ApplicationController
     @topic.assign_attributes(topic_params)
 
      if @topic.save
-       flash[:notice] = "Topic was updated successfully."
+       @topic.labels = Label.update_labels(params[:topic][:labels])
+       flash[:notice] = "Topic was updated."
        redirect_to @topic
      else
        flash.now[:alert] = "Error saving topic. Please try again."
@@ -56,6 +61,7 @@ class TopicsController < ApplicationController
      end
    end
 
+
    private
 
    def topic_params
@@ -68,4 +74,4 @@ class TopicsController < ApplicationController
        redirect_to topics_path
      end
    end
-end
+ end

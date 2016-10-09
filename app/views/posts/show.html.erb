@@ -3,13 +3,21 @@
    <small>
      submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
    </small>
- </h1>
+</h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      <%= render partial: "labels/list", locals: { labels: @post.labels } %>
+      <br />
+    </div>
+  </div>
+  <br />
 
 <div class="row">
   <div class="col-md-8">
     <p><%= @post.body %></p>
      <div>
-       <h3>Comments</h3>
+       <h4>Comments</h4>
        <%= render @post.comments %>
      </div>
 

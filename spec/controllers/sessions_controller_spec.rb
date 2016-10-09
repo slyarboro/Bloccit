@@ -37,14 +37,14 @@ RSpec.describe SessionsController, type: :controller do
        expect(response).to render_template :new
      end
 
-     it "redirects to the root view" do
-       post :create, session: {email: my_user.email, password: my_user.password}
-       expect(response).to redirect_to(root_path)
+     it "renders #show view when email address is valid" do
+       post :create, session: {email: user.email, password: user.password}
+       expect(response).to render_template :new
      end
    end
 
    describe "DELETE sessions/id" do
-     it "render the #welcome view" do
+     it "renders the #welcome view" do
        delete :destroy, id: my_user.id
        expect(response).to redirect_to root_path
      end
@@ -59,5 +59,4 @@ RSpec.describe SessionsController, type: :controller do
        expect(flash[:notice]).to be_present
      end
    end
-
 end
