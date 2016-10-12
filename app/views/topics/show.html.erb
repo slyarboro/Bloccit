@@ -15,7 +15,7 @@
     <% @topic.posts.each do |post| %>
     <div class="media">
         <div class="media-body">
-          <h5> class="media-heading">
+          <h5 class="media-heading">
             <%= link_to post.title, topic_post_path(@topic, post) %>
              <%= render partial: "labels/list", locals: { labels: post.labels } %>
            </h5>
@@ -28,6 +28,7 @@
         </div>
       <% end %>
   </div>
+
 
    <% if current_user %>
     <div class="col-md-4">

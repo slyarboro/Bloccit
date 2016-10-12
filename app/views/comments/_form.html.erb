@@ -1,4 +1,4 @@
-<h4>Add a comment</h4>
+<!-- <h4>Add a comment</h4>
 
  <%= form_for [post, comment] do |f| %>
    <div class="form-group">
@@ -6,4 +6,17 @@
      <%= f.text_field :body, class: 'form-control', placeholder: "Enter a new comment" %>
    </div><br>
    <%= f.submit "Submit Comment", class: 'btn btn-default pull-right' %>
- <% end %>
+ <% end %> -->
+
+<!-- SLY: Point of Interest [confirm possibly misstep and determine type of error that would be thrown if one is inevitable] -->
+
+  <h4>Add a comment</h4>
+
+<%= form_for [post, comment] do |f| %>
+    <%= form_group_tag(params[:errors] ? params[:errors][:body] : []) do %>
+        <%= f.label :body, class: 'sr-only' %>
+        <%= f.text_field :body, class: 'form-control', placeholder: 'Enter a new comment' %>
+    <% end %>
+    <%= f.submit 'Submit Comment', class: 'btn btn-default pull-right' %>
+<% end %>
+<br>

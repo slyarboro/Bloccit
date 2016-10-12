@@ -2,10 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Topic, type: :model do
 
-  let(:name) { RandomData.random_sentence }
-  let(:description) { RandomData.random_paragraph }
-  let(:public) { true }
-  let(:topic) { Topic.create!(name: name, description: description) }
+  # let(:name) { RandomData.random_sentence }
+  # let(:description) { RandomData.random_paragraph }
+  # let(:public) { true }
+  # let(:topic) { Topic.create!(name: name, description: description) }
+
+    let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)}
+
 
   it { is_expected.to have_many(:posts) }
   it { is_expected.to have_many(:labelings) }
