@@ -10,7 +10,7 @@ RSpec.describe CommentsController, type: :controller do
    let(:my_comment) { Comment.create!(body: 'Comment Body', post: my_post, user: my_user) }
 
 
-   context "guest" do
+   context "guest user" do
      describe "POST create" do
        it "redirects the user to the sign in view" do
          post :create, post_id: my_post.id, comment: {body: RandomData.random_paragraph}

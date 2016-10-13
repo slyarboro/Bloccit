@@ -7,7 +7,7 @@ RSpec.describe TopicsController, type: :controller do
   let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
 
 # GUEST
-  context "guest" do
+  context "guest user" do
     describe "GET index" do
       it "returns http success" do
         get :index
