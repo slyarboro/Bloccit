@@ -1,7 +1,6 @@
 class TopicsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show]
-  # before_action :authorize_moderator, only: [:edit, :update]
   before_action :authorize_user, except: [:index, :edit, :update, :show]
 
   def index
@@ -56,7 +55,7 @@ class TopicsController < ApplicationController
        flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
        redirect_to action: :index
      else
-       flash.now[:alert] = "There was an error deleting the topic."
+       flash[:alert] = "There was an error deleting the topic."
        render :show
      end
    end
