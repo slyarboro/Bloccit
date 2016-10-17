@@ -107,7 +107,7 @@ RSpec.describe Post, type: :model do
       post.save
     end
 
-    # *
+    # * (from `post.rb`)
     # 43voting >> create a new vote for the post on which it's called, associated with both the post and the user who created it.
     it "associates vote with user of respective post" do
       expect(post.votes.first.user).to eq(post.user)

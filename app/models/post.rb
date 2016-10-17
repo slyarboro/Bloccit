@@ -12,8 +12,8 @@ class Post < ActiveRecord::Base
 
   default_scope { order('rank DESC') }
 
-  # 43voting >> Implement an after_create method for Post*
-  # 43voting >> Name the after_create method create_vote and make it private**
+  # 43voting >> Implement an after_create method for Post* (in `post_spec.rb`)
+  # 43voting >> Name the after_create method create_vote and make it private** (see: private below)
   after_create :create_vote
 
   validates :title, length: { minimum: 5 }, presence: true
