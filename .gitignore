@@ -15,3 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore application configuration
+# added to .gitignore by Figaro (gem) installer
+/config/application.yml

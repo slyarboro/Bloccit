@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   # add - associate votes to/with Post so can later call `post.votes`
   # add - dependent :destroy so votes are destroyed if parent post is deleted (ergo association between vote and Post)
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 

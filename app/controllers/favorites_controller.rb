@@ -18,15 +18,16 @@ class FavoritesController < ApplicationController
      redirect_to [post.topic, post]
    end
 
+   # Rails scaffolding, welcome.
    def destroy
      post = Post.find(params[:post_id])
      favorite = current_user.favorites.find(params[:id])
 
      if favorite.destroy
-       flash[:notice] = "Post unfavorited."
+       flash[:notice] = "Post has been removed."
      else
-       flash[:alert] = "Unfavoriting failed."
-     end
+       flash[:alert] = "Failed to remove favorite. Please try again."
        redirect_to [post.topic, post]
+     end
    end
 end

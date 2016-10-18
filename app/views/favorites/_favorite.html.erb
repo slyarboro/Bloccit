@@ -1,14 +1,15 @@
 <!-- use favorite_for method created in User; collect `favorite` it uses later; syntax to both test a condition and get return value in one line -->
- <% if favorite = current_user.favorite_for(post) %>
+<% if favorite = current_user.favorite_for(post) %>
 
   <!-- if there is favorite for current user and post, display link to unfavorite said post -->
   <!-- `link_to` can take block argument of HTML, so able to make link an icon -->
-   <%= link_to [post, favorite], class: 'btn btn-danger', method: :delete do %>
-     <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Unfavorite
-   <% end %>
- <% else %>
+  <%= link_to [post, favorite], class: 'btn btn-danger', method: :delete do %>
+    <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Unfavorite
+  <% end %>
+<% else %>
+
   <!-- if there isn't favorite for current user, display link to create new favorite -->
-   <%= link_to [post, Favorite.new], class: 'btn btn-primary', method: :post do %>
-     <i class="glyphicon glyphicon-star"> </i>&nbsp; Favorite
-   <% end %>
- <% end %>
+  <%= link_to [post, Favorite.new], class: 'btn btn-primary', method: :post do %>
+    <i class="glyphicon glyphicon-star"> </i>&nbsp; Favorite
+  <% end %>
+<% end %>

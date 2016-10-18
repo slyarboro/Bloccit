@@ -1,0 +1,6 @@
+# Expected variables and proper formats, respectively
+# Stores SendGrid credentials as protected values (via ENV)
+# File is visible on Github
+
+SENDGRID_PASSWORD:
+SENDGRID_USERNAME:
