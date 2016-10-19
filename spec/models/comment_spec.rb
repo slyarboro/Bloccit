@@ -33,17 +33,25 @@ RSpec.describe Comment, type: :model do
     # expect -`FavoriteMailer` to receive a call to `new_comment`
     # save - `another_comment` to trigger the [after create] callback
     it "sends email to users who favorited the post" do
-      favorite = user.favorites.create(post: post)
-      expect(FavoriteMailer).to receive(:new_comment).with(user, post, @another_comment).and_return(double(deliver_now: true))
-      
-      @another_comment.save!
+      @user.favorites.where(post: @post).after_create
+
+      allow( FavoriteMailer )
+        .to receive(:new_comment)
+        .with(@user, @post, @comment)
+        .and_return( double(deliver_now: true) )
+
+
+      # favorite = user.favorites.create(post: post)
+      # expect(FavoriteMailer).to receive(:new_comment).with(user, post, @another_comment).and_return(double(deliver_now: true))
+
+      comment.save!
     end
 
     # test - `FavoriteMailer` does not receive call to `new_comment` when `post` itself has not been favorited
     it "does not send emails to users who haven't favorited the post" do
       expect(FavoriteMailer).not_to receive(:new_comment)
 
-      @another_comment.save!
+      comment.save!
     end
   end
 end

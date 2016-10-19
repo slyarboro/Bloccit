@@ -2,9 +2,10 @@ class Post < ActiveRecord::Base
 
   belongs_to :topic
   belongs_to :user
-  has_many :comments, dependent: :destroy
+
   # add - associate votes to/with Post so can later call `post.votes`
   # add - dependent :destroy so votes are destroyed if parent post is deleted (ergo association between vote and Post)
+  has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :labelings, as: :labelable
@@ -17,6 +18,7 @@ class Post < ActiveRecord::Base
   validates :topic, presence: true
   validates :user, presence: true
 
+  after_create :create_favorite
 
   # following - 'votes' is an implied self.votes
   def up_votes
@@ -41,5 +43,11 @@ class Post < ActiveRecord::Base
      age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds
      new_rank = points + age_in_days
      update_attribute(:rank, new_rank)
+   end
+
+
+   def create_favorite
+     Favorite.create(user: self.user, post: self)
+     FavoriteMailer.new_post(self).deliver_now
    end
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
     <h1>New comment to "<%= @post.title %>"</h1>
@@ -12,12 +12,12 @@
       <%= @comment.body %>
     </p>
     <p>
-      # Important: use `topic_post_url`
+      <!-- # Important: use `topic_post_url`
         # when using '_path', then given "relative URL" (ex: "topics/8") which works within context of website since browser will already know the base URL
         # must define it (enter: `_url` which generates "absolute URL" (ex: http://myapp.com/topics/8)
 
       # Opt for `anchor:` of `link_to` (method) which adds custom parameters to URL (ex: "myapp.com/topics/8/posts.../4#comment-12")
-        # with custom parameters, user can get to desired comment directly; "jump to" certain place on site page using anchor (id) [ex: urlname.com/id_tag] jumps view to ID tagged on same page
+        # with custom parameters, user can get to desired comment directly; "jump to" certain place on site page using anchor (id) [ex: urlname.com/id_tag] jumps view to ID tagged on same page -->
       <%= link_to "View Comment on site", topic_post_url(@post.topic, @post, anchor: "comment-#{@comment.id}") %>
     </p>
   </body>

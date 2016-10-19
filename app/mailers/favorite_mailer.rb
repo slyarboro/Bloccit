@@ -17,4 +17,16 @@ class FavoriteMailer < ApplicationMailer
     # after taking hash of items above, prepares email to be sent
     mail(to: user.email, subject: "New comment on #{post.title}")
   end
+
+  # assignment-44favorites
+  # add method (new_post) to notify the post's creator that they've favorited their own post and will begin receiving updates once post is commented on (following suit within file)
+  def new_post(post)
+    headers["Message-ID"] = "<posts/#{post.id}@your-app-name.example>"
+    headers["In-Reply-To"] = "<post/#{post.id}@your-app-name.example>"
+    headers["References"] = "<post/#{post.id}@your-app-name.example>"
+
+    @post = post
+
+    mail(to: post.user.email, subject: "Someone favorited your post, #{post.title}!")
+  end
 end

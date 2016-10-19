@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <h1>You favorited "<% @post.title %>"! Comments on this post will now come straight to your inbox, so you'll never miss an update!</h1>
+  <p>
+    <!-- # Jump view to a particular (ID tagged) spot on page using link_to method >> anchor: [ex: urlname.com/id_tag]  -->
+    <%= link_to "View Post on site", topic_post_url(@post.topic, @post) %>
+    <!-- # ATTN: Brittany
+      - Point of interest: within this context, could 'topic_post_url'(as is) serve as viable target for potential hyperlink? -->
+  </p>
+</body>
+</html>

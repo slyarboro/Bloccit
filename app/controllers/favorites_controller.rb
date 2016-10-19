@@ -9,9 +9,9 @@ class FavoritesController < ApplicationController
      favorite = current_user.favorites.build(post: post)
 
      if favorite.save
-       flash[:notice] = "Post favorited."
+       flash[:notice] = "You have favorited this post!"
      else
-       flash[:alert] = "Favoriting failed."
+       flash[:alert] = "Unable to favorite post. Please refresh the page and try again!"
      end
 
      # redirect - user to post's show view
@@ -24,10 +24,11 @@ class FavoritesController < ApplicationController
      favorite = current_user.favorites.find(params[:id])
 
      if favorite.destroy
-       flash[:notice] = "Post has been removed."
+       flash[:notice] = "Favorite has been removed."
      else
        flash[:alert] = "Failed to remove favorite. Please try again."
-       redirect_to [post.topic, post]
      end
+
+       redirect_to [post.topic, post]
    end
 end

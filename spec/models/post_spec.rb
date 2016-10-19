@@ -8,11 +8,8 @@ RSpec.describe Post, type: :model do
    let(:body) { RandomData.random_paragraph }
 
    let(:topic) { Topic.create!(name: name, description: description) }
-
    let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-
    let(:post) { topic.posts.create!(title: title, body: body, user: user) }
-
 
    it { is_expected.to have_many(:labelings) }
    it { is_expected.to have_many(:labels).through(:labelings) }
@@ -40,6 +37,7 @@ RSpec.describe Post, type: :model do
       it "responds to title" do
         expect(post).to respond_to(:title)
       end
+
       it "responds to body" do
         expect(post).to respond_to(:body)
       end
@@ -95,5 +93,11 @@ RSpec.describe Post, type: :model do
          expect(post.rank).to eq (old_rank - 1)
        end
      end
+
+  describe "after_create" do
+       it "sends an email to the owner of the post" do
+         expect(FavoriteMailer).to receive(:new_post).with(second_post).and_return(double(deliver_now: true))
+         second_post.save
+       end
   end
 end
