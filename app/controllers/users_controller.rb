@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def new
     @user = User.new
   end
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
        create_session(@user)
        redirect_to root_path
      else
-       flash.now[:alert] = "There was an error creating your account. Please try again."
+       flash[:alert] = "There was an error creating your account. Please try again."
        render :new
      end
    end
@@ -26,5 +27,12 @@ class UsersController < ApplicationController
     @user.email = params[:user][:email]
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
+  end
+
+  # retrieve user instance in order to set it to instance variable
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.visible_to(current_user)
+    @favorites = @user.favorites
   end
 end

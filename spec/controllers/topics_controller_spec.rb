@@ -1,12 +1,12 @@
-require 'rails_helper'
-include RandomData
-include SessionsHelper
+  require 'rails_helper'
+  include RandomData
+  include SessionsHelper
 
-RSpec.describe TopicsController, type: :controller do
+  RSpec.describe TopicsController, type: :controller do
 
-  let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
+  let(:my_topic) { create(:topic) }
 
-# GUEST
+  # GUEST
   context "guest user" do
     describe "GET index" do
       it "returns http success" do
@@ -18,11 +18,6 @@ RSpec.describe TopicsController, type: :controller do
         get :index
         expect(assigns(:topics)).to eq([my_topic])
       end
-
-      # it "does not include private topics in @topics" do
-      #   get :index
-      #   expect(assigns(:topics)).not_to include(my_private_topic)
-      # end
     end
 
     describe "GET show" do
@@ -68,7 +63,7 @@ RSpec.describe TopicsController, type: :controller do
         new_name = RandomData.random_sentence
         new_description = RandomData.random_paragraph
 
-        put :update, id: my_topic.id, topic: {name: new_name, description: new_description }
+        put :update, id: my_topic.id, topic: { name: new_name, description: new_description }
         expect(response).to redirect_to(new_session_path)
       end
     end
@@ -81,7 +76,7 @@ RSpec.describe TopicsController, type: :controller do
     end
   end
 
-# MEMBER
+  # MEMBER
   context "member user" do
     before do
       user = User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :member)
@@ -96,7 +91,7 @@ RSpec.describe TopicsController, type: :controller do
 
       it "assigns Topic.all to topic" do
         get :index
-        expect(assigns(:topics)).to eq([my_topic, my_private_topic])
+        expect(assigns(:topics)).to eq([my_topic])
       end
     end
 
@@ -156,7 +151,7 @@ RSpec.describe TopicsController, type: :controller do
     end
   end
 
-# ADMIN
+  # ADMIN
   context "admin user" do
     before do
       user = User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :admin)
@@ -171,7 +166,7 @@ RSpec.describe TopicsController, type: :controller do
 
       it "assigns Topic.all to topic" do
         get :index
-        expect(assigns(:topics)).to eq([my_topic, my_private_topic])
+        expect(assigns(:topics)).to eq([my_topic])
       end
     end
 

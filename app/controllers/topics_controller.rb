@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show]
   # before_action :authorize_moderator, only: [:edit, :update]
-  before_action :authorize_user, except: [:index, :edit, :update, :show]
+  before_action :authorize_user, except: [:index, :show]
 
   def index
     @topics = Topic.all
@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
        flash[:notice] = "Topic was saved successfully."
        redirect_to @topic
     else
-      flash.now[:alert] = "Error creating topic. Please try again."
+      flash[:alert] = "Error creating topic. Please try again."
       render :new
     end
   end
@@ -44,7 +44,7 @@ class TopicsController < ApplicationController
        flash[:notice] = "Topic was updated."
        redirect_to @topic
      else
-       flash.now[:alert] = "Error saving topic. Please try again."
+       flash[:alert] = "Error saving topic. Please try again."
        render :edit
      end
    end
@@ -56,7 +56,7 @@ class TopicsController < ApplicationController
        flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
        redirect_to action: :index
      else
-       flash.now[:alert] = "There was an error deleting the topic."
+       flash[:alert] = "There was an error deleting the topic."
        render :show
      end
    end
