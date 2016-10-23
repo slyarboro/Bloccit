@@ -1,10 +1,13 @@
 require 'rails_helper'
+include RandomData
 
 RSpec.describe Vote, type: :model do
   let(:topic) { create(:topic) }
   let(:user) { create(:user) }
   let(:post) { create(:post) }
-  let(:vote) { Vote.create!(value: 1, post: post, user: user) }
+  let(:vote) { create(:vote) }
+  # let(:vote) { Vote.create!(value: 1, post: post, user: user) }
+    # value shifts to factories/votes.rb
 
   # test - votes belong to posts and users
   it { is_expected.to belong_to(:post) }
@@ -19,13 +22,13 @@ RSpec.describe Vote, type: :model do
      it "triggers update_post on save" do
   # expect - update_post_rank called on 'vote' after saved
        expect(vote).to receive(:update_post).at_least(:once)
-       vote.save!
+       vote.save
      end
 
-     it "#update_post calls update_rank on post " do
+     it "#update_post_rank calls update_rank on post " do
  # expect - 'vote's post will receive call to update_rank
        expect(post).to receive(:update_rank).at_least(:once)
-       vote.save!
+       vote.save
      end
    end
  end

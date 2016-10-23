@@ -1,3 +1,5 @@
+include RandomData
+
 # define new factory for: all-posts that generate one-post with random name and description
 FactoryGirl.define do
   factory :post do

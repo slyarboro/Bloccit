@@ -1,5 +1,4 @@
 require 'rails_helper'
-include RandomData
 
 RSpec.describe User, type: :model do
 
@@ -117,7 +116,45 @@ RSpec.describe User, type: :model do
         # s=48 query parameter specifies returned image should be 48x48 pixels
         expected_gravatar = "http://gravatar.com/avatar/bb6d1172212c180cfbdb7039129d7b03.png?s=48"
         # expect - 'known...tar_url' to return respective '...png?s=48' image
-        expect(known_user.avatar_url(48)).to eq(expected_gravatar)
+        # expect(known_user.avatar_url(48)).to eq(expected_gravatar)
+        expect(User.avatar_url(known_user, 48)).to eq(expected_gravatar)
+      end
+    end
+
+    describe "#has_comments" do
+      it "returns true if user is associated with comments" do
+        user.posts                << build(:post, user: user)
+        user.posts.first.comments << build(:comment, user: user)
+        # expect(user.has_comments?).to be_truthy
+        expect(user.has_comments?).to eq true
+      end
+
+      it "returns false if no association between user and comments" do
+        # expect(user.has_comments?).to be_falsey
+        expect(user.has_comments?).to eq false
+      end
+    end
+
+    describe "#has_favorites" do
+      it "returns true if user is associated with favorites" do
+        post = build(:post, user: user)
+        user.favorites << Favorite.create!(post: post)
+        expect(user.has_favorites?).to eq true
+      end
+
+      it "returns false if no association between user and favorites" do
+        expect(user.has_favorites?).to eq false
+      end
+    end
+
+    describe "#has_posts" do
+      it "returns true if user is associated with posts" do
+        user.posts << build(:post, user: user)
+        expect(user.has_posts?).to eq true
+      end
+
+      it "returns false if no association between user and posts" do
+        expect(user.has_posts?).to eq false
       end
     end
 end

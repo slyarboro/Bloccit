@@ -16,12 +16,13 @@
     # [allow_blank: true] skips validation if no new password is given
     # adds methods to set and authenticate; requires the [password_digest] attribute
     validates :name, length: { minimum: 1, maximum: 100 }, presence: true
-    validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
-    validates :password, length: { minimum: 6 }, allow_blank: true
+    validates :password, presence: true, length: { minimum: 6 }
+    # , if: "password_digest.nil?"
+    # validates :password, length: { minimum: 6 }, allow_blank: true
     validates :email,
     presence: true,
     uniqueness: { case_sensitive: false },
-    length: { minimum: 3, maximum: 254 }
+    length: { minimum: 3, maximum: 100 }
 
 
     has_secure_password
@@ -36,8 +37,20 @@
       favorites.where(post_id: post.id).first
     end
 
-    def avatar_url(size)
-      gravatar_id = Digest::MD5::hexdigest(self.email).downcase
+    def self.avatar_url(user, size)
+      gravatar_id = Digest::MD5::hexdigest(user.email).downcase
       "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+    end
+
+    def has_comments?
+      comments.count > 0
+    end
+
+    def has_favorites?
+      favorites.count > 0
+    end
+
+    def has_posts?
+      posts.count > 0
     end
   end

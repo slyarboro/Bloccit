@@ -3,8 +3,8 @@
      <div class="media">
        <br />
        <!-- # call 'av.._url' to fetch avatar of current user -->
-       <% avatar_url = @user.avatar_url(128) %>
-       <% if avatar_url %>
+       <% avatar_url = User.avatar_url(@user, 128) %>
+       <% unless avatar_url.nil? %>
          <div class="media-left">
            <!-- # create 'img' using Rails' 'image_tag' method -->
            <%= image_tag avatar_url, class: 'media-object' %>
@@ -22,8 +22,34 @@
  </div>
 
  <!-- # use partials to display all posts and comments of current user -->
- <h2>Posts</h2>
- <%= render @user.posts %>
+<h2>Comments</h2>
+<% if @user.has_comments? %>
+    <%= render @user.comments %>
+<% else %>
+    <div class="media">
+      <%= link_to current_user.name, user_path(current_user) %>
+          hasn't had much to say. No comments, for now.
+    </div>
+<% end %>
 
- <h2>Comments</h2>
- <%= render @user.comments %>
+<h2>Favorites</h2>
+<% if @user.has_favorites? %>
+   <% @user.favorites.each do |favorite| %>
+      <%= render partial: 'users/favorite', locals: { post: favorite.post } %>
+   <% end %>
+<% else %>
+   <div class="media">
+     <%= link_to current_user.name, user_path(current_user) %>
+         has no favorites for now. Bummer.
+   </div>
+<% end %>
+
+<h2>Posts</h2>
+<% if @user.has_posts? %>
+    <%= render @user.posts %>
+<% else %>
+    <div class="media">
+      <%= link_to current_user.name, user_path(current_user) %>
+          still needs to create their first post!
+    </div>
+<% end %>

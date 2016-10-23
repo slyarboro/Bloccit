@@ -1,3 +1,5 @@
+include RandomData
+
 # define new factory for topics that generate..
   # topic with random name and description
   # all-topic factory generates one-topic with info

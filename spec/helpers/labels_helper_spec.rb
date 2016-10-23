@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 # Specs in this file have access to a helper object that includes
 # the LabelsHelper. For example:
 #
@@ -13,8 +11,8 @@ require 'rails_helper'
 RSpec.describe LabelsHelper, type: :helper do
   describe "labels_to_buttons" do
      it "turns labels into HTML buttons" do
-       L1 = Label.create!(name: "L1")
-       L2 = Label.create!(name: "L2")
+       L1 = create(:label, name: "L1")
+       L2 = create(:label, name: "L2")
 
        expected_html = '<a class="btn-xs btn-primary" href="/labels/1">L1</a> <a class="btn-xs btn-primary" href="/labels/2">L2</a>'
 
