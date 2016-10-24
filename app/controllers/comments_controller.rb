@@ -3,31 +3,37 @@ class CommentsController < ApplicationController
   before_action :require_sign_in
   before_action :authorize_user, only: [:destroy]
 
-
   def create
      @post = Post.find(params[:post_id])
-     comment = @post.comments.new(comment_params)
-     comment.user = current_user
+     @comment = @post.comments.new(comment_params)
+     @comment.user = current_user
+     @new_comment = Comment.new
 
-     if comment.save
+     if @comment.save
        flash[:notice] = "Comment saved successfully."
-       redirect_to [@post.topic, @post]
      else
        flash[:alert] = "Comment failed to save."
-       redirect_to [@post.topic, @post]
      end
+  end
+
+  respond_to do |format|
+    format.html
+    format.js
   end
 
   def destroy
      @post = Post.find(params[:post_id])
-     comment = @post.comments.find(params[:id])
+     @comment = @post.comments.find(params[:id])
 
-     if comment.destroy
+     if @comment.destroy
        flash[:notice] = "Comment was deleted successfully."
-       redirect_to [@post.topic, @post]
      else
        flash[:alert] = "Comment couldn't be deleted. Try again."
-       redirect_to [@post.topic, @post]
+     end
+
+     respond_to do |format|
+       format.html
+       format.js
      end
    end
 
