@@ -116,8 +116,7 @@ RSpec.describe User, type: :model do
         # s=48 query parameter specifies returned image should be 48x48 pixels
         expected_gravatar = "http://gravatar.com/avatar/bb6d1172212c180cfbdb7039129d7b03.png?s=48"
         # expect - 'known...tar_url' to return respective '...png?s=48' image
-        # expect(known_user.avatar_url(48)).to eq(expected_gravatar)
-        expect(User.avatar_url(known_user, 48)).to eq(expected_gravatar)
+        expect(known_user.avatar_url(48)).to eq(expected_gravatar)
       end
     end
 

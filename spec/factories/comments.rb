@@ -1,9 +1,7 @@
-include RandomData
-
 FactoryGirl.define do
-  factory :comments do
-    user RandomData
-    post RandomData
+  factory :comment do
     body RandomData.random_sentence
+    user
+    post
   end
 end

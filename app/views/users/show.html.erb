@@ -3,8 +3,8 @@
      <div class="media">
        <br />
        <!-- # call 'av.._url' to fetch avatar of current user -->
-       <% avatar_url = User.avatar_url(@user, 128) %>
-       <% unless avatar_url.nil? %>
+       <% avatar_url = @user.avatar_url(128) %>
+       <% if avatar_url %>
          <div class="media-left">
            <!-- # create 'img' using Rails' 'image_tag' method -->
            <%= image_tag avatar_url, class: 'media-object' %>

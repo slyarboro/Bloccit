@@ -1,11 +1,10 @@
 require 'rails_helper'
-include RandomData
 
 RSpec.describe Vote, type: :model do
   let(:topic) { create(:topic) }
   let(:user) { create(:user) }
   let(:post) { create(:post) }
-  let(:vote) { create(:vote) }
+  let(:vote) { create(:vote, post: post) }
   # let(:vote) { Vote.create!(value: 1, post: post, user: user) }
     # value shifts to factories/votes.rb
 
@@ -25,7 +24,7 @@ RSpec.describe Vote, type: :model do
        vote.save
      end
 
-     it "#update_post_rank calls update_rank on post " do
+     it "#update_post calls #update_rank on post " do
  # expect - 'vote's post will receive call to update_rank
        expect(post).to receive(:update_rank).at_least(:once)
        vote.save

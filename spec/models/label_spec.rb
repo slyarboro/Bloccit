@@ -1,5 +1,5 @@
 require 'rails_helper'
-include RandomData
+# include RandomData
 
  RSpec.describe Label, type: :model do
    let(:topic) { create(:topic) }
