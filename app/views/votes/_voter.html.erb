@@ -1,9 +1,13 @@
 <!-- used 'method: :post', since 'link_to' already generates GET request by default -->
-<% if current_user %>
-  <div class="vote-arrows pull-left">
-    <div><%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-chevron-up', method: :post %></div>
 
-    <div><strong><%= post.points %></strong></div>
-    <div><%= link_to " ", post_down_vote_path(post), class: 'glyphicon glyphicon-chevron-down', method: :post %></div>
+<% if current_user %>
+  <!-- <div class="pull-left vote-arrows"> -->
+  <div class="vote-arrows pull-left">
+
+    <div><%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-chevron-up', method: :post, remote: true %></div>
+
+    <div id="post-<%= post.id %>-vote"><strong><%= post.points %></strong></div>
+
+    <div><%= link_to " ", post_down_vote_path(post), class: 'glyphicon glyphicon-chevron-down', method: :post, remote: true %></div>
   </div>
 <% end %>

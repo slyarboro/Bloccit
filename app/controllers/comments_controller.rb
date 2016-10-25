@@ -14,11 +14,12 @@ class CommentsController < ApplicationController
      else
        flash[:alert] = "Comment failed to save."
      end
-  end
+  # end
 
-  respond_to do |format|
-    format.html
-    format.js
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def destroy

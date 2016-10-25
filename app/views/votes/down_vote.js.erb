@@ -1,0 +1,11 @@
+// $('#post-<%= @post.id %>-vote').html("<strong><%= @post.points %></strong>");
+
+// Followed format of checkpoint exercise (bootleg attempt shown more so in up_vote form). That said, if it's correct, there's definitely a better way to condense and/or simplify this, right? For aesthetics, if anything.
+
+$(".js-post-<%=@post.id%>-points").html("<strong><%= @post.points %></strong>");
+
+$(".js-post-<%=@post.id%>-points-header").html("<%= pluralize(@post.points, 'point') %>");
+
+$(".js-post-<%=@post.id%>-votes").html("
+<%= pluralize(@post.up_votes, 'up vote') %>,
+<%= pluralize(@post.down_votes, 'down vote') %>");
