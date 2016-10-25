@@ -9,6 +9,8 @@
     before_save { self.email = email.downcase }
     before_save { self.role ||= :member }
 
+    before_create :generate_auth_token
+
     # ensure name is present with respective lengths
     # ensure email address is valid and complies with specs
     # ensure new users will have valid password
@@ -39,5 +41,19 @@
     def avatar_url(size)
       gravatar_id = Digest::MD5::hexdigest(self.email).downcase
       "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+    end
+
+    # def self.avatar_url(user, size)
+    #  gravatar_id = Digest::MD5::hexdigest(user.email).downcase
+    #  "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+    # end
+
+    # above added/switched with former to test generate_auth_token failing test
+
+    def generate_auth_token
+      loop do
+        self.auth_token = SecureRandom.base64(64)
+        break unless User.find_by(auth_token: auth_token)
+      end
     end
   end
