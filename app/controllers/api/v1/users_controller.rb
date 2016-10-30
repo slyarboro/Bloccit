@@ -4,13 +4,13 @@ class Api::V1::UsersController < Api::V1::BaseController
   before_action :authorize_user
 
   def show
-    user = User.find_by(id: params[:id])
-    render json: user.to_json, status: 200
+    user = User.find(params[:id])
+    render json: user, status: 200
   end
 
   def index
     users = User.all
-    render json: users.to_json, status: 200
+    render json: users, status: 200
   end
 
   def update
@@ -33,7 +33,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       render json: { error: "User is invalid", status: 400 }, status: 400
     end
   end
-
+  
 
   private
 
