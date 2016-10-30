@@ -12,8 +12,8 @@ Rails.application.routes.draw do
     post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
 
-# create routes for #new and #create actions
-# [only:] prevents Rails creating unnecessary routes
+  # create routes for #new and #create actions
+  # [only:] prevents Rails creating unnecessary routes
 
   resources :users, only: [:new, :create, :show]
   resources :sessions, only: [:new, :create, :destroy]
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :show]
+      resources :users, only: [:index, :show, :create, :update]
       resources :topics, only: [:index, :show]
 
     end

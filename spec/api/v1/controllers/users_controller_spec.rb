@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Api::V1::UsersController, type: :controller do
   let(:my_user) { create(:user) }
 
-  # #12
   context "unauthenticated users" do
     it "GET index returns http unauthenticated" do
       get :index
@@ -16,7 +15,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
   end
 
-  # #13
   context "authenticated and unauthorized users" do
     before do
       controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
@@ -33,7 +31,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
   end
 
-  # #14
   context "authenticated and authorized users" do
     before do
       my_user.admin!
@@ -47,7 +44,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         expect(response).to have_http_status(:success)
       end
 
-      # #15
       it "returns json content type" do
         expect(response.content_type).to eq("application/json")
       end
@@ -57,7 +53,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
     end
 
-    # #16
     describe "GET show" do
       before { get :show, id: my_user.id }
 
